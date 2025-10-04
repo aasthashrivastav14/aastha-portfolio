@@ -133,11 +133,12 @@
                 </div>
 
                 <div class="max-w-4xl mx-auto">
-                    <!-- Tabs adjusted for light background (border and text color changes in style block) -->
-                    <div class="flex border-b border-gray-300 mb-8">
-                        <button class="project-tab active flex-1 text-center font-medium p-4" data-target="project1">💳 Payment Dashboard</button>
-                        <button class="project-tab flex-1 text-center font-medium p-4" data-target="project2">📈 System Monitor</button>
-                        <button class="project-tab flex-1 text-center font-medium p-4" data-target="project3">🏦 Banking System</button>
+                    <!-- Tabs adjusted for better mobile responsiveness using flex-wrap on small screens -->
+                    <div class="flex flex-wrap justify-center border-b border-gray-300 mb-8">
+                        <!-- Removed flex-1 so buttons wrap cleanly on mobile -->
+                        <button class="project-tab active text-center font-medium px-6 py-3" data-target="project1">💳 Payment Dashboard</button>
+                        <button class="project-tab text-center font-medium px-6 py-3" data-target="project2">📈 System Monitor</button>
+                        <button class="project-tab text-center font-medium px-6 py-3" data-target="project3">🏦 Banking System</button>
                     </div>
 
                     <div id="project-contents">
