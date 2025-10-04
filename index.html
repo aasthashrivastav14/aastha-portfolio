@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AASTHA SHRIVASTAV | Associate Software Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Professional -->
+    <!-- Application Structure Plan: A single-page portfolio layout was chosen for its intuitive, linear user flow, familiar to recruiters. The structure starts with a summary (Hero), followed by interactive sections for Skills (filterable chart) and Projects (tabbed view), and ends with Education and Contact details. This design prioritizes progressive disclosure: users get a high-level overview first, then can actively drill down into the details that interest them most (specific skills or projects). This is more engaging and efficient than a static text document. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Technical Skills table -> Goal: Compare/Inform -> Viz: Interactive Horizontal Bar Chart -> Interaction: Filter buttons to update chart data by category -> Justification: A chart is more visually engaging and allows for quick assessment of skill sets. Filtering enables recruiters to focus on technologies relevant to their needs. Library: Chart.js/Canvas.
+        - Report Info: Project descriptions -> Goal: Organize/Inform -> Presentation: Tabbed interface -> Interaction: Click on a project title to reveal its details -> Justification: Tabs cleanly organize dense information, preventing an overwhelming initial view and encouraging focused exploration of each project. Method: Vanilla JS DOM manipulation.
+        - Report Info: Summary/Education -> Goal: Inform -> Presentation: Themed text sections -> Interaction: None -> Justification: Clear, readable text is best for narrative content.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF7;
+            color: #3D405B;
+        }
+        .nav-link {
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #3A86FF;
+        }
+        .skill-btn {
+            transition: all 0.3s ease;
+        }
+        .skill-btn.active {
+            background-color: #3A86FF;
+            color: #FFFFFF;
+        }
+        .project-tab {
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .project-tab.active {
+            color: #3A86FF;
+            border-bottom-color: #3A86FF;
+        }
+        .project-content {
+            display: none;
+        }
+        .project-content.active {
+            display: block;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 500px;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-[#3D405B]">
+                AASTHA SHRIVASTAV
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#summary" class="nav-link text-gray-600 font-medium">Summary</a>
+                <a href="#skills" class="nav-link text-gray-600 font-medium">Skills</a>
+                <a href="#projects" class="nav-link text-gray-600 font-medium">Projects</a>
+                <a href="#contact" class="nav-link text-gray-600 font-medium">Contact</a>
+            </div>
+            <div class="md:hidden">
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="summary" class="py-20 md:py-32">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-[#3D405B] mb-4">Aspiring Software Engineer</h1>
+                <p class="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">
+                    Highly motivated and results-driven recent graduate with a BS in Computer Science and a foundational understanding of the Software Development Life Cycle (SDLC). Eager to apply basic coding skills in Java and Python to develop, debug, and validate internal and external client software solutions. Possesses basic knowledge of relational and NoSQL databases. Seeking to perform in a utility capacity within a flexible development environment.
+                </p>
+            </div>
+        </section>
+
+        <section id="skills" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-[#3D405B]">Technical Skills</h2>
+                    <p class="mt-4 text-lg text-gray-600">A visual overview of my technical abilities. Use the filters to explore different categories.</p>
+                </div>
+
+                <div id="skill-filters" class="flex flex-wrap justify-center gap-2 mb-8">
+                    <button class="skill-btn active px-4 py-2 bg-gray-200 text-gray-800 font-medium rounded-full" data-category="all">All Skills</button>
+                    <button class="skill-btn px-4 py-2 bg-gray-200 text-gray-800 font-medium rounded-full" data-category="Programming Languages">Languages</button>
+                    <button class="skill-btn px-4 py-2 bg-gray-200 text-gray-800 font-medium rounded-full" data-category="Web Technologies">Web</button>
+                    <button class="skill-btn px-4 py-2 bg-gray-200 text-gray-800 font-medium rounded-full" data-category="Databases">Databases</button>
+                    <button class="skill-btn px-4 py-2 bg-gray-200 text-gray-800 font-medium rounded-full" data-category="Tools & Systems">Tools & Systems</button>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="skillsChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-[#3D405B]">Academic & Personal Projects</h2>
+                    <p class="mt-4 text-lg text-gray-600">Click on a project title to see the details. These projects demonstrate my ability to apply technology to solve problems.</p>
+                </div>
+
+                <div class="max-w-4xl mx-auto">
+                    <div class="flex border-b border-gray-300 mb-8">
+                        <button class="project-tab active flex-1 text-center font-medium p-4" data-target="project1">Payment Dashboard</button>
+                        <button class="project-tab flex-1 text-center font-medium p-4" data-target="project2">System Monitor</button>
+                        <button class="project-tab flex-1 text-center font-medium p-4" data-target="project3">Banking System</button>
+                    </div>
+
+                    <div id="project-contents">
+                        <div id="project1" class="project-content active bg-white p-8 rounded-lg shadow-lg">
+                            <h3 class="text-2xl font-bold mb-4 text-[#3D405B]">Full-Stack Payment Processing Simulation Dashboard</h3>
+                            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                <li>Developed a single-page application using React.js (front-end) and Node.js with Express (back-end) to simulate payment transaction monitoring and status updates.</li>
+                                <li>Utilized MySQL to design and manage the transaction database schema (DDL and DML operations) and ensured data integrity.</li>
+                                <li>Implemented RESTful APIs in the back-end to handle data flow between the front-end dashboard and the database.</li>
+                                <li>Applied basic security concepts to data handling, demonstrating foundational knowledge applicable to Payment Card Industry (PCI) compliance.</li>
+                            </ul>
+                        </div>
+                        <div id="project2" class="project-content bg-white p-8 rounded-lg shadow-lg">
+                            <h3 class="text-2xl font-bold mb-4 text-[#3D405B]">Linux System Resource Monitor in Python</h3>
+                             <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                <li>Created a command-line utility in Python that monitors real-time CPU, memory, and disk usage on a Linux (Ubuntu) environment.</li>
+                                <li>Utilized Python's `psutil` library to collect system metrics, demonstrating proficiency in data analysis and system interaction.</li>
+                                <li>Designed the tool to periodically log data to a local file, simulating basic data processing requirements for system maintenance.</li>
+                            </ul>
+                        </div>
+                        <div id="project3" class="project-content bg-white p-8 rounded-lg shadow-lg">
+                            <h3 class="text-2xl font-bold mb-4 text-[#3D405B]">Core Banking Transaction System (Java/DB2 Concept)</h3>
+                             <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                <li>Designed and Coded a basic account management system using Java that handles deposits, withdrawals, and balance inquiries.</li>
+                                <li>Modeled the application logic around large-scale transaction processing, similar to concepts used in Mainframe environments (z/OS and DB2).</li>
+                                <li>Performed thorough unit testing and validation (manual and automated) for all transaction functions, aligning with the SDLC testing requirements of the role.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="education" class="py-20 bg-white">
+            <div class="container mx-auto px-6 text-center max-w-3xl">
+                <h2 class="text-3xl md:text-4xl font-bold text-[#3D405B] mb-12">Education & Development</h2>
+                <div class="text-left grid md:grid-cols-2 gap-8">
+                     <div class="bg-slate-50 p-6 rounded-lg shadow-md">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">Bachelor of Computer Science</h3>
+                        <p class="text-gray-600">Pratibha College of Commerce and Computer Studies | Pune, Maharashtra</p>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-lg shadow-md">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">Professional Development</h3>
+                        <p class="text-gray-600">Completed a comprehensive course in Java, Data Structure and algorithm.</p>
+                    </div>
+                     <div class="bg-slate-50 p-6 rounded-lg shadow-md md:col-span-2">
+                        <h3 class="font-bold text-lg text-gray-800 mb-2">Problem Solving</h3>
+                        <p class="text-gray-600">Proficient in translating complex requirements into simple, efficient code structures.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer id="contact" class="bg-[#3D405B] text-white py-16">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold mb-4">Get In Touch</h2>
+                <p class="max-w-lg mx-auto mb-8">I am actively looking for opportunities. Please feel free to reach out.</p>
+                <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8 text-lg">
+                    <a href="mailto:aasthashrivastav10@gmail.com" class="hover:text-[#3A86FF] transition-colors"><span>&#9993;</span> aasthashrivastav10@gmail.com</a>
+                    <span><span>&#9742;</span> 9422454657</span>
+                    <span>&#128205; Pune, Maharashtra</span>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const allSkills = [
+                { name: 'Python', proficiency: 90, category: 'Programming Languages' },
+                { name: 'Java', proficiency: 90, category: 'Programming Languages' },
+                { name: 'C++', proficiency: 75, category: 'Programming Languages' },
+                { name: 'JavaScript', proficiency: 60, category: 'Programming Languages' },
+                { name: 'SQL', proficiency: 88, category: 'Programming Languages' },
+                { name: 'DML', proficiency: 88, category: 'Programming Languages' },
+                { name: 'HTML', proficiency: 95, category: 'Web Technologies' },
+                { name: 'CSS', proficiency: 95, category: 'Web Technologies' },
+                { name: 'React js', proficiency: 50, category: 'Web Technologies' },
+                { name: 'MySQL', proficiency: 88, category: 'Databases' },
+                { name: 'PgSQL', proficiency: 78, category: 'Databases' },
+                { name: 'Linux', proficiency: 80, category: 'Tools & Systems' },
+                { name: 'Windows', proficiency: 95, category: 'Tools & Systems' },
+                { name: 'Visual Studio', proficiency: 85, category: 'Tools & Systems' },
+                { name: 'Eclipse', proficiency: 50, category: 'Tools & Systems' },
+                { name: 'Intellij IDEA', proficiency: 60, category: 'Tools & Systems' },
+            ];
+
+            let skillsChart;
+            const ctx = document.getElementById('skillsChart').getContext('2d');
+
+            function createChart(data) {
+                if (skillsChart) {
+                    skillsChart.destroy();
+                }
+                skillsChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: data.map(skill => skill.name),
+                        datasets: [{
+                            label: 'Proficiency',
+                            data: data.map(skill => skill.proficiency),
+                            backgroundColor: 'rgba(58, 134, 255, 0.7)',
+                            borderColor: 'rgba(58, 134, 255, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `Proficiency: ${context.raw}%`;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                max: 100,
+                                grid: { color: 'rgba(0, 0, 0, 0.05)' }
+                            },
+                            y: { grid: { display: false } }
+                        }
+                    }
+                });
+            }
+
+            createChart(allSkills);
+
+            const filterButtons = document.querySelectorAll('.skill-btn');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    const category = button.dataset.category;
+                    const filteredData = category === 'all' ? allSkills : allSkills.filter(skill => skill.category === category);
+                    createChart(filteredData);
+                });
+            });
+
+            const projectTabs = document.querySelectorAll('.project-tab');
+            const projectContents = document.querySelectorAll('.project-content');
+            projectTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    projectTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    const targetId = tab.dataset.target;
+                    projectContents.forEach(content => {
+                        content.classList.toggle('active', content.id === targetId);
+                    });
+                });
+            });
+            
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
