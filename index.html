@@ -9,22 +9,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Dark Mode Professional (High Contrast) -->
-    <!-- Application Structure Plan: A single-page portfolio layout was chosen for its intuitive, linear user flow, familiar to recruiters. The structure starts with a summary (Hero), followed by interactive sections for Skills (filterable chart) and Projects (tabbed view), and ends with Education and Contact details. This design prioritizes progressive disclosure: users get a high-level overview first, then can actively drill down into the details that interest them most (specific skills or projects). This is more engaging and efficient than a static text document. -->
-    <!-- Visualization & Content Choices: 
-        - Report Info: Technical Skills table -> Goal: Compare/Inform -> Viz: Interactive Horizontal Bar Chart -> Interaction: Filter buttons to update chart data by category -> Justification: A chart is more visually engaging and allows for quick assessment of skill sets. Filtering enables recruiters to focus on technologies relevant to their needs. Library: Chart.js/Canvas.
-        - Report Info: Project descriptions -> Goal: Organize/Inform -> Presentation: Tabbed interface -> Interaction: Click on a project title to reveal its details -> Justification: Tabs cleanly organize dense information, preventing an overwhelming initial view and encouraging focused exploration of each project. Method: Vanilla JS DOM manipulation.
-        - Report Info: Summary/Education -> Goal: Inform -> Presentation: Themed text sections -> Interaction: None -> Justification: Clear, readable text is best for narrative content.
-    -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <!-- Chosen Palette: Light Mode Professional (High Contrast Blue/White) -->
+    <!-- Application Structure Plan: A single-page portfolio layout was chosen for its intuitive, linear user flow, familiar to recruiters. The structure starts with a summary (Hero), followed by interactive sections for Skills (filterable chart) and Projects (tabbed view), and ends with Contact details. -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            color: #F3F4F6; /* Light gray for general text */
-            /* UPDATED: Significantly increased the visibility of the white/light gray mixture 
-               by using a stronger radial gradient that fades into the deep black. */
-            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.15) 0%, rgba(10, 10, 10, 1) 70%);
-            background-color: #0A0A0A; /* Deep black base */
+            color: #1F2937; /* Dark gray for general text */
+            background-color: #FFFFFF; /* Pure white base */
             background-attachment: fixed; 
         }
         .nav-link {
@@ -43,7 +34,7 @@
         .project-tab {
             transition: all 0.3s ease;
             border-bottom: 2px solid transparent;
-            color: #D1D5DB; /* Light gray tab text */
+            color: #1F2937; /* Dark gray tab text */
         }
         .project-tab.active {
             color: #3A86FF; /* Bright blue accent color */
@@ -72,20 +63,18 @@
 </head>
 <body class="antialiased">
 
-    <header class="bg-gray-900/80 backdrop-blur-md sticky top-0 z-50 shadow-lg">
-        <!-- Adjusted the container to use flex and justify-center on mobile, and justify-between on desktop -->
+    <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 shadow-lg border-b border-gray-100">
+        <!-- Adjusted text colors for light background -->
         <nav class="container mx-auto px-6 py-4 flex items-center justify-center md:justify-between">
-            <!-- Name Header: Icon removed for a clean text presentation -->
-            <div class="text-2xl font-extrabold text-white flex items-center gap-2 whitespace-nowrap">
+            <div class="text-2xl font-extrabold text-[#1F2937] flex items-center gap-2 whitespace-nowrap">
                 AASTHA SHRIVASTAV
             </div>
-            <!-- Navigation links remain hidden on mobile, appear centered on desktop -->
             <div class="hidden md:flex space-x-8">
-                <!-- Navigation links adjusted for dark theme -->
-                <a href="#summary" class="nav-link text-gray-300 font-medium">✨ Summary</a>
-                <a href="#skills" class="nav-link text-gray-300 font-medium">🛠️ Skills</a>
-                <a href="#projects" class="nav-link text-gray-300 font-medium">💻 Projects</a>
-                <a href="#contact" class="nav-link text-gray-300 font-medium">📬 Contact</a>
+                <!-- Navigation links adjusted for light theme -->
+                <a href="#summary" class="nav-link text-gray-600 font-medium">✨ Summary</a>
+                <a href="#skills" class="nav-link text-gray-600 font-medium">🛠️ Skills</a>
+                <a href="#projects" class="nav-link text-gray-600 font-medium">💻 Projects</a>
+                <a href="#contact" class="nav-link text-gray-600 font-medium">📬 Contact</a>
             </div>
             <!-- This empty div is no longer needed -->
             <!-- <div class="md:hidden"> </div> -->
@@ -96,31 +85,31 @@
         <section id="summary" class="py-20 md:py-32">
             <div class="container mx-auto px-6 text-center">
                 
-                <!-- Title: Icon removed for a clean text presentation -->
-                <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-10 flex justify-center items-center gap-4">
+                <!-- Title adjusted for dark text -->
+                <h1 class="text-4xl md:text-6xl font-extrabold text-[#3D405B] mb-10 flex justify-center items-center gap-4">
                     Aspiring Software Engineer
                 </h1>
                 
-                <!-- UPDATED: Re-wrote the paragraph for impact and wrapped it in a visually distinct container -->
-                <div class="max-w-4xl mx-auto bg-gray-900/50 p-6 md:p-8 rounded-xl shadow-2xl border border-[#3A86FF]/50">
-                    <p class="text-lg md:text-xl text-gray-200">
+                <!-- UPDATED: Subtle light gray background for the summary paragraph for clean contrast -->
+                <div class="max-w-4xl mx-auto bg-slate-50 p-6 md:p-8 rounded-xl shadow-lg border border-gray-200">
+                    <p class="text-lg md:text-xl text-gray-700">
                         A proactive and dedicated Computer Science graduate focused on building a career in software development. Bringing a strong grasp of the Software Development Life Cycle (SDLC) and core proficiency in Java and Python, I am ready to translate requirements into tested, functional code. My technical foundation includes practical experience with modern development tools and both relational (SQL) and NoSQL databases. Seeking a challenging role to contribute immediately to a dynamic team.
                     </p>
                 </div>
             </div>
         </section>
 
-        <!-- Removed bg-white class from section to show dark background -->
-        <section id="skills" class="py-20"> 
+        <!-- Changed section background to a subtle off-white for visual separation -->
+        <section id="skills" class="py-20 bg-gray-50"> 
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
-                    <!-- Text color changed to white -->
-                    <h2 class="text-3xl md:text-4xl font-bold text-white">Technical Skills</h2>
-                    <p class="mt-4 text-lg text-gray-300">A visual overview of my technical abilities. Use the filters to explore different categories.</p>
+                    <!-- Text color adjusted for dark text -->
+                    <h2 class="text-3xl md:text-4xl font-bold text-[#3D405B]">Technical Skills</h2>
+                    <p class="mt-4 text-lg text-gray-600">A visual overview of my technical abilities. Use the filters to explore different categories.</p>
                 </div>
 
                 <div id="skill-filters" class="flex flex-wrap justify-center gap-2 mb-8">
-                    <!-- Filter buttons remain light gray/blue to contrast dark background -->
+                    <!-- Buttons remain the same, they already work well for light mode -->
                     <button class="skill-btn active px-4 py-2 bg-gray-200 text-gray-800 font-medium rounded-full" data-category="all">⭐ All Skills</button>
                     <button class="skill-btn px-4 py-2 bg-gray-200 text-gray-800 font-medium rounded-full" data-category="Programming Languages">🐍 Languages</button>
                     <button class="skill-btn px-4 py-2 bg-gray-200 text-gray-800 font-medium rounded-full" data-category="Web Technologies">🌐 Web</button>
@@ -138,21 +127,21 @@
         <section id="projects" class="py-20">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
-                    <!-- Text color changed to white -->
-                    <h2 class="text-3xl md:text-4xl font-bold text-white">Academic & Personal Projects</h2>
-                    <p class="mt-4 text-lg text-gray-300">Click on a project title to see the details. These projects demonstrate my ability to apply technology to solve problems.</p>
+                    <!-- Text color adjusted for dark text -->
+                    <h2 class="text-3xl md:text-4xl font-bold text-[#3D405B]">Academic & Personal Projects</h2>
+                    <p class="mt-4 text-lg text-gray-600">Click on a project title to see the details. These projects demonstrate my ability to apply technology to solve problems.</p>
                 </div>
 
                 <div class="max-w-4xl mx-auto">
-                    <!-- Tabs adjusted for dark background -->
-                    <div class="flex border-b border-gray-600 mb-8">
+                    <!-- Tabs adjusted for light background (border and text color changes in style block) -->
+                    <div class="flex border-b border-gray-300 mb-8">
                         <button class="project-tab active flex-1 text-center font-medium p-4" data-target="project1">💳 Payment Dashboard</button>
                         <button class="project-tab flex-1 text-center font-medium p-4" data-target="project2">📈 System Monitor</button>
                         <button class="project-tab flex-1 text-center font-medium p-4" data-target="project3">🏦 Banking System</button>
                     </div>
 
                     <div id="project-contents">
-                        <!-- Content boxes remain white for maximum readability against dark background -->
+                        <!-- Content boxes remain white/light background with dark text -->
                         <div id="project1" class="project-content active bg-white p-8 rounded-lg shadow-xl">
                             <h3 class="text-2xl font-bold mb-4 text-[#3D405B]">Full-Stack Payment Processing Simulation Dashboard</h3>
                             <ul class="list-disc list-inside space-y-2 text-gray-700">
@@ -183,11 +172,11 @@
             </div>
         </section>
 
-        <!-- Removed bg-white class from section to show dark background -->
-        <section id="education" class="py-20"> 
+        <!-- Changed section background to a subtle off-white for visual separation -->
+        <section id="education" class="py-20 bg-gray-50"> 
             <div class="container mx-auto px-6 text-center max-w-3xl">
-                <!-- Text color changed to white -->
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-12">Education & Development</h2>
+                <!-- Text color adjusted for dark text -->
+                <h2 class="text-3xl md:text-4xl font-bold text-[#3D405B] mb-12">Education & Development</h2>
                 <div class="text-left grid md:grid-cols-2 gap-8">
                      <!-- Content boxes remain light for contrast -->
                      <div class="bg-white p-6 rounded-lg shadow-xl">
@@ -206,28 +195,28 @@
             </div>
         </section>
 
-        <footer id="contact" class="bg-slate-100 text-gray-900 py-16">
+        <!-- UPDATED: Footer is now the accent blue color with white text -->
+        <footer id="contact" class="bg-[#3A86FF] text-white py-16">
             <div class="container mx-auto px-6 text-center">
                 
                 <!-- NEW: Large SVG Icon for visual impact -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-16 h-16 mx-auto mb-6 text-[#3A86FF]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-16 h-16 mx-auto mb-6 text-white">
                     <rect width="20" height="16" x="2" y="4" rx="2"/>
                     <path d="m22 7-8.97 5.7a1.83 1.83 0 0 1-2.07 0L2 7"/>
                 </svg>
                 
                 <h2 class="text-3xl font-bold mb-4">Get In Touch</h2>
-                <!-- UPDATED: Removed max-w-lg and adjusted font-size for better single-line display potential on desktop -->
                 <p class="mx-auto mb-8 text-base md:text-lg font-medium">I am actively looking for opportunities. Please feel free to reach out.</p>
                 
                 <!-- START OF CONSOLIDATED CONTACT DETAILS -->
                 <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 text-xl whitespace-nowrap">
                     <!-- Item 1: Email -->
-                    <a href="mailto:aasthashrivastav10@gmail.com" class="hover:text-[#3A86FF] transition-colors flex items-center gap-2 md:mx-4">
+                    <a href="mailto:aasthashrivastav10@gmail.com" class="hover:text-white/80 transition-colors flex items-center gap-2 md:mx-4">
                         <span>&#9993;</span> aasthashrivastav10@gmail.com
                     </a>
                     
                     <!-- Separator 1 (Hidden on mobile) -->
-                    <span class="hidden md:inline mx-2 text-gray-500 text-base">|</span> 
+                    <span class="hidden md:inline mx-2 text-white/50 text-base">|</span> 
                     
                     <!-- Item 2: Phone -->
                     <span class="flex items-center gap-2 md:mx-4">
@@ -235,7 +224,7 @@
                     </span>
                     
                     <!-- Separator 2 (Hidden on mobile) -->
-                    <span class="hidden md:inline mx-2 text-gray-500 text-base">|</span> 
+                    <span class="hidden md:inline mx-2 text-white/50 text-base">|</span> 
 
                     <!-- Item 3: Location -->
                     <span class="flex items-center gap-2 md:mx-4">
@@ -309,12 +298,12 @@
                             x: {
                                 beginAtZero: true,
                                 max: 100,
-                                // Changed grid color to dark to be visible on white background
+                                // Grid color is now dark for visibility on white background
                                 grid: { color: 'rgba(0, 0, 0, 0.1)' } 
                             },
                             y: { 
                                 grid: { display: false }, 
-                                // FIX: Changed skill label (tick) color from 'white' to dark gray for visibility
+                                // Tick labels (skill names) are dark for visibility
                                 ticks: { color: '#1F2937' } 
                             }
                         }
