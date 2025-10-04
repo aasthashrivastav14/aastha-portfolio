@@ -9,8 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Light Mode Professional (High Contrast Blue/White) -->
-    <!-- Application Structure Plan: A single-page portfolio layout was chosen for its intuitive, linear user flow, familiar to recruiters. The structure starts with a summary (Hero), followed by interactive sections for Skills (filterable chart) and Projects (tabbed view), and ends with Contact details. -->
+    <!-- Chosen Palette: Modern Professional (Deep Navy Blue/Bright Blue Accent) -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -18,18 +17,21 @@
             background-color: #FFFFFF; /* Pure white base */
             background-attachment: fixed; 
         }
+        /* Accent Color: Bright Blue (#3A86FF) */
         .nav-link {
             transition: color 0.3s ease;
         }
         .nav-link:hover {
-            color: #3A86FF; /* Bright blue accent color */
+            color: #3A86FF; 
         }
         .skill-btn {
             transition: all 0.3s ease;
+            border-radius: 9999px; /* Tailwind's rounded-full */
         }
         .skill-btn.active {
-            background-color: #3A86FF; /* Bright blue accent color */
+            background-color: #3A86FF; 
             color: #FFFFFF;
+            box-shadow: 0 4px 6px -1px rgba(58, 134, 255, 0.3), 0 2px 4px -2px rgba(58, 134, 255, 0.3);
         }
         .project-tab {
             transition: all 0.3s ease;
@@ -37,8 +39,8 @@
             color: #1F2937; /* Dark gray tab text */
         }
         .project-tab.active {
-            color: #3A86FF; /* Bright blue accent color */
-            border-bottom-color: #3A86FF; /* Bright blue accent color */
+            color: #3A86FF; 
+            border-bottom-color: #3A86FF; 
         }
         .project-content {
             display: none;
@@ -63,53 +65,69 @@
 </head>
 <body class="antialiased">
 
-    <header class="bg-white/90 backdrop-blur-md sticky top-0 z-50 shadow-lg border-b border-gray-100">
-        <!-- Adjusted text colors for light background -->
-        <nav class="container mx-auto px-6 py-4 flex items-center justify-center md:justify-between">
-            <div class="text-2xl font-extrabold text-[#1F2937] flex items-center gap-2 whitespace-nowrap">
+    <!-- HEADER: Deep Navy Blue for professionalism. Now includes a mobile menu toggle. -->
+    <header class="bg-[#1E3A8A] sticky top-0 z-50 shadow-lg shadow-white/20">
+        <nav class="container mx-auto px-6 py-4 flex items-center justify-between"> <!-- Changed to justify-between for mobile button -->
+            <!-- Name/Logo -->
+            <a href="#summary" class="text-2xl font-extrabold text-white flex items-center gap-2 drop-shadow-md">
                 AASTHA SHRIVASTAV
-            </div>
+            </a>
+
+            <!-- Desktop Navigation -->
             <div class="hidden md:flex space-x-8">
-                <!-- Navigation links adjusted for light theme -->
-                <a href="#summary" class="nav-link text-gray-600 font-medium">✨ Summary</a>
-                <a href="#skills" class="nav-link text-gray-600 font-medium">🛠️ Skills</a>
-                <a href="#projects" class="nav-link text-gray-600 font-medium">💻 Projects</a>
-                <a href="#contact" class="nav-link text-gray-600 font-medium">📬 Contact</a>
+                <a href="#summary" class="nav-link text-gray-300 font-medium hover:text-[#3A86FF]">✨ Summary</a>
+                <a href="#skills" class="nav-link text-gray-300 font-medium hover:text-[#3A86FF]">🛠️ Skills</a>
+                <a href="#projects" class="nav-link text-gray-300 font-medium hover:text-[#3A86FF]">💻 Projects</a>
+                <a href="#contact" class="nav-link text-gray-300 font-medium hover:text-[#3A86FF]">📬 Contact</a>
             </div>
-            <!-- This empty div is no longer needed -->
-            <!-- <div class="md:hidden"> </div> -->
+
+            <!-- Mobile Menu Button (Hamburger) -->
+            <button id="mobile-menu-button" class="md:hidden text-white p-2 focus:outline-none focus:ring-2 focus:ring-[#3A86FF] rounded-md">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
         </nav>
+        
+        <!-- Mobile Menu Dropdown (Initially hidden) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#1E3A8A] border-t border-white/10">
+            <div class="flex flex-col space-y-2 p-4">
+                <!-- Links stack vertically on mobile -->
+                <a href="#summary" class="nav-link text-gray-300 font-medium hover:text-[#3A86FF] py-2 text-center border-b border-white/5">✨ Summary</a>
+                <a href="#skills" class="nav-link text-gray-300 font-medium hover:text-[#3A86FF] py-2 text-center border-b border-white/5">🛠️ Skills</a>
+                <a href="#projects" class="nav-link text-gray-300 font-medium hover:text-[#3A86FF] py-2 text-center border-b border-white/5">💻 Projects</a>
+                <a href="#contact" class="nav-link text-gray-300 font-medium hover:text-[#3A86FF] py-2 text-center">📬 Contact</a>
+            </div>
+        </div>
     </header>
 
     <main>
-        <section id="summary" class="py-20 md:py-32">
+        <!-- SUMMARY SECTION -->
+        <section id="summary" class="py-20 md:py-32 bg-white">
             <div class="container mx-auto px-6 text-center">
                 
-                <!-- Title adjusted for dark text -->
                 <h1 class="text-4xl md:text-6xl font-extrabold text-[#3D405B] mb-10 flex justify-center items-center gap-4">
                     Aspiring Software Engineer
                 </h1>
                 
-                <!-- UPDATED: Subtle light gray background for the summary paragraph for clean contrast -->
-                <div class="max-w-4xl mx-auto bg-slate-50 p-6 md:p-8 rounded-xl shadow-lg border border-gray-200">
-                    <p class="text-lg md:text-xl text-gray-700">
+                <div class="max-w-4xl mx-auto bg-gray-50 p-6 md:p-8 rounded-2xl shadow-xl border border-gray-100">
+                    <p class="text-base md:text-lg text-gray-700">
                         A proactive and dedicated Computer Science graduate focused on building a career in software development. Bringing a strong grasp of the Software Development Life Cycle (SDLC) and core proficiency in Java and Python, I am ready to translate requirements into tested, functional code. My technical foundation includes practical experience with modern development tools and both relational (SQL) and NoSQL databases. Seeking a challenging role to contribute immediately to a dynamic team.
                     </p>
                 </div>
             </div>
         </section>
 
-        <!-- Changed section background to a subtle off-white for visual separation -->
+        <!-- SKILLS SECTION -->
         <section id="skills" class="py-20 bg-gray-50"> 
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
-                    <!-- Text color adjusted for dark text -->
                     <h2 class="text-3xl md:text-4xl font-bold text-[#3D405B]">Technical Skills</h2>
                     <p class="mt-4 text-lg text-gray-600">A visual overview of my technical abilities. Use the filters to explore different categories.</p>
                 </div>
 
+                <!-- Skill buttons wrap nicely on mobile due to flex-wrap -->
                 <div id="skill-filters" class="flex flex-wrap justify-center gap-2 mb-8">
-                    <!-- Buttons remain the same, they already work well for light mode -->
                     <button class="skill-btn active px-4 py-2 bg-gray-200 text-gray-800 font-medium rounded-full" data-category="all">⭐ All Skills</button>
                     <button class="skill-btn px-4 py-2 bg-gray-200 text-gray-800 font-medium rounded-full" data-category="Programming Languages">🐍 Languages</button>
                     <button class="skill-btn px-4 py-2 bg-gray-200 text-gray-800 font-medium rounded-full" data-category="Web Technologies">🌐 Web</button>
@@ -117,33 +135,30 @@
                     <button class="skill-btn px-4 py-2 bg-gray-200 text-gray-800 font-medium rounded-full" data-category="Tools & Systems">⚙️ Tools & Systems</button>
                 </div>
 
-                <!-- Chart is inherently on a light canvas background -->
-                <div class="chart-container bg-white p-4 rounded-lg shadow-xl"> 
+                <div class="chart-container bg-white p-6 rounded-2xl shadow-2xl"> 
                     <canvas id="skillsChart"></canvas>
                 </div>
             </div>
         </section>
 
-        <section id="projects" class="py-20">
+        <!-- PROJECTS SECTION -->
+        <section id="projects" class="py-20 bg-white">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
-                    <!-- Text color adjusted for dark text -->
                     <h2 class="text-3xl md:text-4xl font-bold text-[#3D405B]">Academic & Personal Projects</h2>
                     <p class="mt-4 text-lg text-gray-600">Click on a project title to see the details. These projects demonstrate my ability to apply technology to solve problems.</p>
                 </div>
 
                 <div class="max-w-4xl mx-auto">
-                    <!-- Tabs adjusted for better mobile responsiveness using flex-wrap on small screens -->
+                    <!-- Project tabs use flex-wrap to ensure they stack or wrap on small screens -->
                     <div class="flex flex-wrap justify-center border-b border-gray-300 mb-8">
-                        <!-- Removed flex-1 so buttons wrap cleanly on mobile -->
                         <button class="project-tab active text-center font-medium px-6 py-3" data-target="project1">💳 Payment Dashboard</button>
                         <button class="project-tab text-center font-medium px-6 py-3" data-target="project2">📈 System Monitor</button>
                         <button class="project-tab text-center font-medium px-6 py-3" data-target="project3">🏦 Banking System</button>
                     </div>
 
                     <div id="project-contents">
-                        <!-- Content boxes remain white/light background with dark text -->
-                        <div id="project1" class="project-content active bg-white p-8 rounded-lg shadow-xl">
+                        <div id="project1" class="project-content active bg-white p-8 rounded-xl shadow-2xl border border-gray-100">
                             <h3 class="text-2xl font-bold mb-4 text-[#3D405B]">Full-Stack Payment Processing Simulation Dashboard</h3>
                             <ul class="list-disc list-inside space-y-2 text-gray-700">
                                 <li>Developed a single-page application using React.js (front-end) and Node.js with Express (back-end) to simulate payment transaction monitoring and status updates.</li>
@@ -152,7 +167,7 @@
                                 <li>Applied basic security concepts to data handling, demonstrating foundational knowledge applicable to Payment Card Industry (PCI) compliance.</li>
                             </ul>
                         </div>
-                        <div id="project2" class="project-content bg-white p-8 rounded-lg shadow-xl">
+                        <div id="project2" class="project-content bg-white p-8 rounded-xl shadow-2xl border border-gray-100">
                             <h3 class="text-2xl font-bold mb-4 text-[#3D405B]">Linux System Resource Monitor in Python</h3>
                              <ul class="list-disc list-inside space-y-2 text-gray-700">
                                 <li>Created a command-line utility in Python that monitors real-time CPU, memory, and disk usage on a Linux (Ubuntu) environment.</li>
@@ -160,7 +175,7 @@
                                 <li>Designed the tool to periodically log data to a local file, simulating basic data processing requirements for system maintenance.</li>
                             </ul>
                         </div>
-                        <div id="project3" class="project-content bg-white p-8 rounded-lg shadow-xl">
+                        <div id="project3" class="project-content bg-white p-8 rounded-xl shadow-2xl border border-gray-100">
                             <h3 class="text-2xl font-bold mb-4 text-[#3D405B]">Core Banking Transaction System (Java/DB2 Concept)</h3>
                              <ul class="list-disc list-inside space-y-2 text-gray-700">
                                 <li>Designed and Coded a basic account management system using Java that handles deposits, withdrawals, and balance inquiries.</li>
@@ -173,22 +188,21 @@
             </div>
         </section>
 
-        <!-- Changed section background to a subtle off-white for visual separation -->
+        <!-- EDUCATION SECTION -->
         <section id="education" class="py-20 bg-gray-50"> 
             <div class="container mx-auto px-6 text-center max-w-3xl">
-                <!-- Text color adjusted for dark text -->
                 <h2 class="text-3xl md:text-4xl font-bold text-[#3D405B] mb-12">Education & Development</h2>
                 <div class="text-left grid md:grid-cols-2 gap-8">
-                     <!-- Content boxes remain light for contrast -->
-                     <div class="bg-white p-6 rounded-lg shadow-xl">
+                     <!-- Content boxes stack on mobile and go side-by-side on desktop -->
+                     <div class="bg-white p-6 rounded-xl shadow-xl">
                         <h3 class="font-bold text-lg text-gray-800 mb-2">Bachelor of Computer Science</h3>
                         <p class="text-gray-600">Pratibha College of Commerce and Computer Studies | Pune, Maharashtra</p>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-xl">
+                    <div class="bg-white p-6 rounded-xl shadow-xl">
                         <h3 class="font-bold text-lg text-gray-800 mb-2">Professional Development</h3>
                         <p class="text-gray-600">Completed a comprehensive course in Java, Data Structure and algorithm.</p>
                     </div>
-                     <div class="bg-white p-6 rounded-lg shadow-xl md:col-span-2">
+                     <div class="bg-white p-6 rounded-xl shadow-xl md:col-span-2">
                         <h3 class="font-bold text-lg text-gray-800 mb-2">Problem Solving</h3>
                         <p class="text-gray-600">Proficient in translating complex requirements into simple, efficient code structures.</p>
                     </div>
@@ -196,43 +210,42 @@
             </div>
         </section>
 
-        <!-- UPDATED: Footer is now a neutral gray color with dark text -->
-        <footer id="contact" class="bg-gray-200 text-gray-800 py-16">
+        <!-- FOOTER / CONTACT SECTION -->
+        <footer id="contact" class="bg-[#1E3A8A] text-white py-16">
             <div class="container mx-auto px-6 text-center">
                 
-                <!-- NEW: Large SVG Icon for visual impact (Color changed to accent blue) -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-16 h-16 mx-auto mb-6 text-[#3A86FF]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-16 h-16 mx-auto mb-6 text-[#3A86FF] drop-shadow-lg">
                     <rect width="20" height="16" x="2" y="4" rx="2"/>
                     <path d="m22 7-8.97 5.7a1.83 1.83 0 0 1-2.07 0L2 7"/>
                 </svg>
                 
                 <h2 class="text-3xl font-bold mb-4">Get In Touch</h2>
-                <p class="mx-auto mb-8 text-base md:text-lg font-medium whitespace-nowrap">I am actively looking for opportunities. Please feel free to reach out.</p>
                 
-                <!-- START OF CONSOLIDATED CONTACT DETAILS -->
-                <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 text-xl whitespace-nowrap">
-                    <!-- Item 1: Email (Hover color changed to accent blue) -->
-                    <a href="mailto:aasthashrivastav10@gmail.com" class="hover:text-[#3A86FF] transition-colors flex items-center gap-2 md:mx-4">
+                <p class="mx-auto mb-8 text-sm md:text-base font-medium text-gray-300">I am actively looking for opportunities. Please feel free to reach out.</p>
+                
+                <!-- Contact details stack vertically on mobile (flex-col) and become horizontal on desktop (md:flex-row) -->
+                <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 text-lg whitespace-nowrap">
+                    <!-- Item 1: Email -->
+                    <a href="mailto:aasthashrivastav10@gmail.com" class="hover:text-[#3A86FF] transition-colors flex items-center gap-2 md:mx-4 font-medium">
                         <span>&#9993;</span> aasthashrivastav10@gmail.com
                     </a>
                     
-                    <!-- Separator 1 (Color changed to dark gray) -->
-                    <span class="hidden md:inline mx-2 text-gray-500 text-base">|</span> 
+                    <!-- Separator 1 (Hidden on mobile) -->
+                    <span class="hidden md:inline mx-2 text-gray-400 text-base">|</span> 
                     
                     <!-- Item 2: Phone -->
-                    <span class="flex items-center gap-2 md:mx-4">
+                    <span class="flex items-center gap-2 md:mx-4 text-gray-200">
                         <span>&#9742;</span> 9422454657
                     </span>
                     
-                    <!-- Separator 2 (Color changed to dark gray) -->
-                    <span class="hidden md:inline mx-2 text-gray-500 text-base">|</span> 
+                    <!-- Separator 2 (Hidden on mobile) -->
+                    <span class="hidden md:inline mx-2 text-gray-400 text-base">|</span> 
 
                     <!-- Item 3: Location -->
-                    <span class="flex items-center gap-2 md:mx-4">
+                    <span class="flex items-center gap-2 md:mx-4 text-gray-200">
                         &#128205; Pune, Maharashtra
                     </span>
                 </div>
-                <!-- END OF CONSOLIDATED CONTACT DETAILS -->
 
             </div>
         </footer>
@@ -240,6 +253,27 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+
+            // --- Mobile Menu Toggle Logic ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuButton.addEventListener('click', () => {
+                // Toggles the 'hidden' class on the mobile menu container
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when any link inside it is clicked
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    // Ensures smooth scroll
+                    document.querySelector(link.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    // Hides the menu after selection
+                    mobileMenu.classList.add('hidden');
+                });
+            });
 
             // --- Existing Chart and Tab Logic ---
 
@@ -338,12 +372,17 @@
                 });
             });
             
+            // Existing smooth scroll logic for desktop navigation
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
+                    // If it's a link in the desktop nav, the scroll behavior is handled here.
+                    // Mobile menu links are handled separately above to include the close action.
+                    if (!this.closest('#mobile-menu')) {
+                        e.preventDefault();
+                        document.querySelector(this.getAttribute('href')).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
                 });
             });
         });
