@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Calm Professional -->
+    <!-- Chosen Palette: Dark Mode Professional (High Contrast) -->
     <!-- Application Structure Plan: A single-page portfolio layout was chosen for its intuitive, linear user flow, familiar to recruiters. The structure starts with a summary (Hero), followed by interactive sections for Skills (filterable chart) and Projects (tabbed view), and ends with Education and Contact details. This design prioritizes progressive disclosure: users get a high-level overview first, then can actively drill down into the details that interest them most (specific skills or projects). This is more engaging and efficient than a static text document. -->
     <!-- Visualization & Content Choices: 
         - Report Info: Technical Skills table -> Goal: Compare/Inform -> Viz: Interactive Horizontal Bar Chart -> Interaction: Filter buttons to update chart data by category -> Justification: A chart is more visually engaging and allows for quick assessment of skill sets. Filtering enables recruiters to focus on technologies relevant to their needs. Library: Chart.js/Canvas.
@@ -20,29 +20,34 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #FDFBF7;
-            color: #3D405B;
+            color: #F3F4F6; /* Light gray for general text */
+            /* UPDATED: Significantly increased the visibility of the white/light gray mixture 
+               by using a stronger radial gradient that fades into the deep black. */
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.15) 0%, rgba(10, 10, 10, 1) 70%);
+            background-color: #0A0A0A; /* Deep black base */
+            background-attachment: fixed; 
         }
         .nav-link {
             transition: color 0.3s ease;
         }
         .nav-link:hover {
-            color: #3A86FF;
+            color: #3A86FF; /* Bright blue accent color */
         }
         .skill-btn {
             transition: all 0.3s ease;
         }
         .skill-btn.active {
-            background-color: #3A86FF;
+            background-color: #3A86FF; /* Bright blue accent color */
             color: #FFFFFF;
         }
         .project-tab {
             transition: all 0.3s ease;
             border-bottom: 2px solid transparent;
+            color: #D1D5DB; /* Light gray tab text */
         }
         .project-tab.active {
-            color: #3A86FF;
-            border-bottom-color: #3A86FF;
+            color: #3A86FF; /* Bright blue accent color */
+            border-bottom-color: #3A86FF; /* Bright blue accent color */
         }
         .project-content {
             display: none;
@@ -67,48 +72,64 @@
 </head>
 <body class="antialiased">
 
-    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-2xl font-bold text-[#3D405B]">
+    <header class="bg-gray-900/80 backdrop-blur-md sticky top-0 z-50 shadow-lg">
+        <!-- Adjusted the container to use flex and justify-center on mobile, and justify-between on desktop -->
+        <nav class="container mx-auto px-6 py-4 flex items-center justify-center md:justify-between">
+            <!-- Name Header: Icon removed for a clean text presentation -->
+            <div class="text-2xl font-extrabold text-white flex items-center gap-2 whitespace-nowrap">
                 AASTHA SHRIVASTAV
             </div>
+            <!-- Navigation links remain hidden on mobile, appear centered on desktop -->
             <div class="hidden md:flex space-x-8">
-                <a href="#summary" class="nav-link text-gray-600 font-medium">Summary</a>
-                <a href="#skills" class="nav-link text-gray-600 font-medium">Skills</a>
-                <a href="#projects" class="nav-link text-gray-600 font-medium">Projects</a>
-                <a href="#contact" class="nav-link text-gray-600 font-medium">Contact</a>
+                <!-- Navigation links adjusted for dark theme -->
+                <a href="#summary" class="nav-link text-gray-300 font-medium">✨ Summary</a>
+                <a href="#skills" class="nav-link text-gray-300 font-medium">🛠️ Skills</a>
+                <a href="#projects" class="nav-link text-gray-300 font-medium">💻 Projects</a>
+                <a href="#contact" class="nav-link text-gray-300 font-medium">📬 Contact</a>
             </div>
-            <div class="md:hidden">
-            </div>
+            <!-- This empty div is no longer needed -->
+            <!-- <div class="md:hidden"> </div> -->
         </nav>
     </header>
 
     <main>
         <section id="summary" class="py-20 md:py-32">
             <div class="container mx-auto px-6 text-center">
-                <h1 class="text-4xl md:text-6xl font-bold text-[#3D405B] mb-4">Aspiring Software Engineer</h1>
-                <p class="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">
-                    Highly motivated and results-driven recent graduate with a BS in Computer Science and a foundational understanding of the Software Development Life Cycle (SDLC). Eager to apply basic coding skills in Java and Python to develop, debug, and validate internal and external client software solutions. Possesses basic knowledge of relational and NoSQL databases. Seeking to perform in a utility capacity within a flexible development environment.
-                </p>
+                
+                <!-- Title: Icon removed for a clean text presentation -->
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-10 flex justify-center items-center gap-4">
+                    Aspiring Software Engineer
+                </h1>
+                
+                <!-- UPDATED: Re-wrote the paragraph for impact and wrapped it in a visually distinct container -->
+                <div class="max-w-4xl mx-auto bg-gray-900/50 p-6 md:p-8 rounded-xl shadow-2xl border border-[#3A86FF]/50">
+                    <p class="text-lg md:text-xl text-gray-200">
+                        A proactive and dedicated Computer Science graduate focused on building a career in software development. Bringing a strong grasp of the Software Development Life Cycle (SDLC) and core proficiency in Java and Python, I am ready to translate requirements into tested, functional code. My technical foundation includes practical experience with modern development tools and both relational (SQL) and NoSQL databases. Seeking a challenging role to contribute immediately to a dynamic team.
+                    </p>
+                </div>
             </div>
         </section>
 
-        <section id="skills" class="py-20 bg-white">
+        <!-- Removed bg-white class from section to show dark background -->
+        <section id="skills" class="py-20"> 
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-[#3D405B]">Technical Skills</h2>
-                    <p class="mt-4 text-lg text-gray-600">A visual overview of my technical abilities. Use the filters to explore different categories.</p>
+                    <!-- Text color changed to white -->
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Technical Skills</h2>
+                    <p class="mt-4 text-lg text-gray-300">A visual overview of my technical abilities. Use the filters to explore different categories.</p>
                 </div>
 
                 <div id="skill-filters" class="flex flex-wrap justify-center gap-2 mb-8">
-                    <button class="skill-btn active px-4 py-2 bg-gray-200 text-gray-800 font-medium rounded-full" data-category="all">All Skills</button>
-                    <button class="skill-btn px-4 py-2 bg-gray-200 text-gray-800 font-medium rounded-full" data-category="Programming Languages">Languages</button>
-                    <button class="skill-btn px-4 py-2 bg-gray-200 text-gray-800 font-medium rounded-full" data-category="Web Technologies">Web</button>
-                    <button class="skill-btn px-4 py-2 bg-gray-200 text-gray-800 font-medium rounded-full" data-category="Databases">Databases</button>
-                    <button class="skill-btn px-4 py-2 bg-gray-200 text-gray-800 font-medium rounded-full" data-category="Tools & Systems">Tools & Systems</button>
+                    <!-- Filter buttons remain light gray/blue to contrast dark background -->
+                    <button class="skill-btn active px-4 py-2 bg-gray-200 text-gray-800 font-medium rounded-full" data-category="all">⭐ All Skills</button>
+                    <button class="skill-btn px-4 py-2 bg-gray-200 text-gray-800 font-medium rounded-full" data-category="Programming Languages">🐍 Languages</button>
+                    <button class="skill-btn px-4 py-2 bg-gray-200 text-gray-800 font-medium rounded-full" data-category="Web Technologies">🌐 Web</button>
+                    <button class="skill-btn px-4 py-2 bg-gray-200 text-gray-800 font-medium rounded-full" data-category="Databases">🗄️ Databases</button>
+                    <button class="skill-btn px-4 py-2 bg-gray-200 text-gray-800 font-medium rounded-full" data-category="Tools & Systems">⚙️ Tools & Systems</button>
                 </div>
 
-                <div class="chart-container">
+                <!-- Chart is inherently on a light canvas background -->
+                <div class="chart-container bg-white p-4 rounded-lg shadow-xl"> 
                     <canvas id="skillsChart"></canvas>
                 </div>
             </div>
@@ -117,19 +138,22 @@
         <section id="projects" class="py-20">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-[#3D405B]">Academic & Personal Projects</h2>
-                    <p class="mt-4 text-lg text-gray-600">Click on a project title to see the details. These projects demonstrate my ability to apply technology to solve problems.</p>
+                    <!-- Text color changed to white -->
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Academic & Personal Projects</h2>
+                    <p class="mt-4 text-lg text-gray-300">Click on a project title to see the details. These projects demonstrate my ability to apply technology to solve problems.</p>
                 </div>
 
                 <div class="max-w-4xl mx-auto">
-                    <div class="flex border-b border-gray-300 mb-8">
-                        <button class="project-tab active flex-1 text-center font-medium p-4" data-target="project1">Payment Dashboard</button>
-                        <button class="project-tab flex-1 text-center font-medium p-4" data-target="project2">System Monitor</button>
-                        <button class="project-tab flex-1 text-center font-medium p-4" data-target="project3">Banking System</button>
+                    <!-- Tabs adjusted for dark background -->
+                    <div class="flex border-b border-gray-600 mb-8">
+                        <button class="project-tab active flex-1 text-center font-medium p-4" data-target="project1">💳 Payment Dashboard</button>
+                        <button class="project-tab flex-1 text-center font-medium p-4" data-target="project2">📈 System Monitor</button>
+                        <button class="project-tab flex-1 text-center font-medium p-4" data-target="project3">🏦 Banking System</button>
                     </div>
 
                     <div id="project-contents">
-                        <div id="project1" class="project-content active bg-white p-8 rounded-lg shadow-lg">
+                        <!-- Content boxes remain white for maximum readability against dark background -->
+                        <div id="project1" class="project-content active bg-white p-8 rounded-lg shadow-xl">
                             <h3 class="text-2xl font-bold mb-4 text-[#3D405B]">Full-Stack Payment Processing Simulation Dashboard</h3>
                             <ul class="list-disc list-inside space-y-2 text-gray-700">
                                 <li>Developed a single-page application using React.js (front-end) and Node.js with Express (back-end) to simulate payment transaction monitoring and status updates.</li>
@@ -138,7 +162,7 @@
                                 <li>Applied basic security concepts to data handling, demonstrating foundational knowledge applicable to Payment Card Industry (PCI) compliance.</li>
                             </ul>
                         </div>
-                        <div id="project2" class="project-content bg-white p-8 rounded-lg shadow-lg">
+                        <div id="project2" class="project-content bg-white p-8 rounded-lg shadow-xl">
                             <h3 class="text-2xl font-bold mb-4 text-[#3D405B]">Linux System Resource Monitor in Python</h3>
                              <ul class="list-disc list-inside space-y-2 text-gray-700">
                                 <li>Created a command-line utility in Python that monitors real-time CPU, memory, and disk usage on a Linux (Ubuntu) environment.</li>
@@ -146,7 +170,7 @@
                                 <li>Designed the tool to periodically log data to a local file, simulating basic data processing requirements for system maintenance.</li>
                             </ul>
                         </div>
-                        <div id="project3" class="project-content bg-white p-8 rounded-lg shadow-lg">
+                        <div id="project3" class="project-content bg-white p-8 rounded-lg shadow-xl">
                             <h3 class="text-2xl font-bold mb-4 text-[#3D405B]">Core Banking Transaction System (Java/DB2 Concept)</h3>
                              <ul class="list-disc list-inside space-y-2 text-gray-700">
                                 <li>Designed and Coded a basic account management system using Java that handles deposits, withdrawals, and balance inquiries.</li>
@@ -158,20 +182,23 @@
                 </div>
             </div>
         </section>
-        
-        <section id="education" class="py-20 bg-white">
+
+        <!-- Removed bg-white class from section to show dark background -->
+        <section id="education" class="py-20"> 
             <div class="container mx-auto px-6 text-center max-w-3xl">
-                <h2 class="text-3xl md:text-4xl font-bold text-[#3D405B] mb-12">Education & Development</h2>
+                <!-- Text color changed to white -->
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-12">Education & Development</h2>
                 <div class="text-left grid md:grid-cols-2 gap-8">
-                     <div class="bg-slate-50 p-6 rounded-lg shadow-md">
+                     <!-- Content boxes remain light for contrast -->
+                     <div class="bg-white p-6 rounded-lg shadow-xl">
                         <h3 class="font-bold text-lg text-gray-800 mb-2">Bachelor of Computer Science</h3>
                         <p class="text-gray-600">Pratibha College of Commerce and Computer Studies | Pune, Maharashtra</p>
                     </div>
-                    <div class="bg-slate-50 p-6 rounded-lg shadow-md">
+                    <div class="bg-white p-6 rounded-lg shadow-xl">
                         <h3 class="font-bold text-lg text-gray-800 mb-2">Professional Development</h3>
                         <p class="text-gray-600">Completed a comprehensive course in Java, Data Structure and algorithm.</p>
                     </div>
-                     <div class="bg-slate-50 p-6 rounded-lg shadow-md md:col-span-2">
+                     <div class="bg-white p-6 rounded-lg shadow-xl md:col-span-2">
                         <h3 class="font-bold text-lg text-gray-800 mb-2">Problem Solving</h3>
                         <p class="text-gray-600">Proficient in translating complex requirements into simple, efficient code structures.</p>
                     </div>
@@ -179,21 +206,52 @@
             </div>
         </section>
 
-        <footer id="contact" class="bg-[#3D405B] text-white py-16">
+        <footer id="contact" class="bg-slate-100 text-gray-900 py-16">
             <div class="container mx-auto px-6 text-center">
+                
+                <!-- NEW: Large SVG Icon for visual impact -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-16 h-16 mx-auto mb-6 text-[#3A86FF]">
+                    <rect width="20" height="16" x="2" y="4" rx="2"/>
+                    <path d="m22 7-8.97 5.7a1.83 1.83 0 0 1-2.07 0L2 7"/>
+                </svg>
+                
                 <h2 class="text-3xl font-bold mb-4">Get In Touch</h2>
-                <p class="max-w-lg mx-auto mb-8">I am actively looking for opportunities. Please feel free to reach out.</p>
-                <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8 text-lg">
-                    <a href="mailto:aasthashrivastav10@gmail.com" class="hover:text-[#3A86FF] transition-colors"><span>&#9993;</span> aasthashrivastav10@gmail.com</a>
-                    <span><span>&#9742;</span> 9422454657</span>
-                    <span>&#128205; Pune, Maharashtra</span>
+                <!-- UPDATED: Removed max-w-lg and adjusted font-size for better single-line display potential on desktop -->
+                <p class="mx-auto mb-8 text-base md:text-lg font-medium">I am actively looking for opportunities. Please feel free to reach out.</p>
+                
+                <!-- START OF CONSOLIDATED CONTACT DETAILS -->
+                <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 text-xl whitespace-nowrap">
+                    <!-- Item 1: Email -->
+                    <a href="mailto:aasthashrivastav10@gmail.com" class="hover:text-[#3A86FF] transition-colors flex items-center gap-2 md:mx-4">
+                        <span>&#9993;</span> aasthashrivastav10@gmail.com
+                    </a>
+                    
+                    <!-- Separator 1 (Hidden on mobile) -->
+                    <span class="hidden md:inline mx-2 text-gray-500 text-base">|</span> 
+                    
+                    <!-- Item 2: Phone -->
+                    <span class="flex items-center gap-2 md:mx-4">
+                        <span>&#9742;</span> 9422454657
+                    </span>
+                    
+                    <!-- Separator 2 (Hidden on mobile) -->
+                    <span class="hidden md:inline mx-2 text-gray-500 text-base">|</span> 
+
+                    <!-- Item 3: Location -->
+                    <span class="flex items-center gap-2 md:mx-4">
+                        &#128205; Pune, Maharashtra
+                    </span>
                 </div>
+                <!-- END OF CONSOLIDATED CONTACT DETAILS -->
+
             </div>
         </footer>
     </main>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+
+            // --- Existing Chart and Tab Logic ---
 
             const allSkills = [
                 { name: 'Python', proficiency: 90, category: 'Programming Languages' },
@@ -228,8 +286,8 @@
                         datasets: [{
                             label: 'Proficiency',
                             data: data.map(skill => skill.proficiency),
-                            backgroundColor: 'rgba(58, 134, 255, 0.7)',
-                            borderColor: 'rgba(58, 134, 255, 1)',
+                            backgroundColor: 'rgba(58, 134, 255, 0.7)', // Bright blue
+                            borderColor: 'rgba(58, 134, 255, 1)', // Bright blue
                             borderWidth: 1
                         }]
                     },
@@ -251,9 +309,14 @@
                             x: {
                                 beginAtZero: true,
                                 max: 100,
-                                grid: { color: 'rgba(0, 0, 0, 0.05)' }
+                                // Changed grid color to dark to be visible on white background
+                                grid: { color: 'rgba(0, 0, 0, 0.1)' } 
                             },
-                            y: { grid: { display: false } }
+                            y: { 
+                                grid: { display: false }, 
+                                // FIX: Changed skill label (tick) color from 'white' to dark gray for visibility
+                                ticks: { color: '#1F2937' } 
+                            }
                         }
                     }
                 });
@@ -297,4 +360,3 @@
     </script>
 </body>
 </html>
-
